@@ -1,0 +1,872 @@
+/* Vos9x Inspired Styles */
+:root {
+    --bg-primary: #0A0F1E; /* Gehra neela/kala */
+    --bg-secondary: #10182C; /* Thoda halka gehra neela */
+    --bg-glass: rgba(20, 30, 55, 0.3); /* Glassmorphism ke liye */
+    --text-primary: #E0E0FF; /* Bahut halka neela/safed */
+    --text-secondary: #9098B0; /* Halka سرمئی neela */
+    
+    --accent-pink: #FF4081;
+    --accent-purple: #AE3BFF;
+    --accent-cyan: #00E5FF;
+    --accent-glow: rgba(var(--accent-pink-rgb), 0.3); /* For box-shadow glows */
+
+    /* RGB versions for rgba glows */
+    --accent-pink-rgb: 255, 64, 129;
+    --accent-purple-rgb: 174, 59, 255;
+    --accent-cyan-rgb: 0, 229, 255;
+    --bg-primary-rgb: 10, 15, 30; /* Added for input background */
+
+
+    --font-primary: 'Rajdhani', sans-serif;
+    --font-secondary: 'Poppins', sans-serif;
+    
+    --border-glow: 0 0 15px rgba(var(--accent-cyan-rgb), 0.5), 0 0 5px rgba(var(--accent-cyan-rgb), 0.7);
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-secondary);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(var(--accent-purple-rgb), 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(var(--accent-cyan-rgb), 0.08) 0%, transparent 30%),
+        linear-gradient(to bottom, var(--bg-primary) 0%, #080C18 100%);
+    background-attachment: fixed;
+}
+
+/* .container is handled by Bootstrap, but you can override if needed */
+/*
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+*/
+
+/* Gradient Text Utility */
+.gradient-text {
+    background-image: linear-gradient(90deg, var(--accent-pink), var(--accent-purple), var(--accent-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+.text-highlight {
+    color: var(--accent-cyan);
+    font-weight: 600; /* Make highlights a bit bolder */
+}
+
+
+/* --- Navigation Bar --- */
+header {
+    padding: 10px 0; /* Reduced padding as Bootstrap navbar handles some */
+    /* position: sticky; // Handled by Bootstrap .sticky-top */
+    /* top: 0; */
+    background-color: rgba(10, 15, 30, 0.85); /* Darker, more transparent */
+    backdrop-filter: blur(10px);
+    z-index: 1030; /* Bootstrap's sticky-top is 1020 */
+    border-bottom: 1px solid rgba(var(--accent-cyan-rgb), 0.2);
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: rgba(var(--accent-cyan-rgb), 0.5);
+}
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 229, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+
+.logo {
+    font-family: var(--font-primary);
+    font-size: 2.4rem; /* Slightly adjusted */
+    font-weight: 700;
+    color: var(--text-primary) !important; /* Important to override Bootstrap */
+    letter-spacing: 1px;
+    transition: text-shadow 0.3s ease;
+}
+.logo .logo-accent {
+    background-image: linear-gradient(45deg, var(--accent-pink), var(--accent-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.logo:hover {
+    text-shadow: 0 0 10px rgba(var(--accent-cyan-rgb), 0.7);
+}
+
+/* nav ul { list-style: none; display: flex; } Bootstrap handles this */
+.navbar-nav .nav-item {
+    margin-left: 25px; /* Adjusted margin for Bootstrap nav items */
+    position: relative;
+}
+@media (max-width: 991.98px) { /* Bootstrap lg breakpoint */
+    .navbar-nav .nav-item {
+        margin-left: 0;
+        text-align: center; /* Center links in mobile menu */
+    }
+    .navbar-collapse {
+        background-color: rgba(10, 15, 30, 0.95);
+        border-radius: 8px;
+        margin-top: 10px;
+        padding: 15px;
+        border: 1px solid rgba(var(--accent-cyan-rgb), 0.1);
+    }
+}
+
+
+.navbar-nav .nav-link { /* Targeting Bootstrap's nav-link */
+    text-decoration: none;
+    color: var(--text-secondary) !important; /* Important to override Bootstrap */
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    padding-bottom: 8px !important;
+    letter-spacing: 0.5px;
+    position: relative; /* For the ::after pseudo-element */
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, var(--accent-pink), var(--accent-cyan));
+    transition: width 0.4s ease;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    width: 70%; /* Slightly less than 100% for a refined look */
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--text-primary) !important; /* Important to override Bootstrap */
+    text-shadow: 0 0 8px rgba(var(--accent-cyan-rgb), 0.5);
+}
+
+.nav-cta {
+    background-image: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    color: var(--text-primary) !important;
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px rgba(var(--accent-pink-rgb), 0.3);
+    border: none;
+    display: inline-block; /* Make it behave like a button */
+}
+.nav-cta:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 25px rgba(var(--accent-purple-rgb), 0.5);
+    color: var(--text-primary) !important;
+}
+
+/* --- General Section Styling --- */
+.section {
+    padding: 80px 0; /* Adjusted padding */
+    overflow: hidden;
+    position: relative;
+}
+
+.section-title {
+    font-family: var(--font-primary);
+    font-size: 3.5rem; /* Responsive adjustments below */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.section-title.gradient-text::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-image: linear-gradient(to right, var(--accent-pink) , var(--accent-cyan));
+    margin: 15px auto 0;
+    border-radius: 3px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    max-width: 750px;
+    margin: 0 auto 50px auto; /* Adjusted margin */
+    line-height: 1.8;
+}
+
+
+/* --- Hero Section --- */
+.hero {
+    display: flex; /* Keep display flex for vertical alignment if needed, Bootstrap row handles horizontal */
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Adjust based on new header height */
+    padding: 60px 0;
+    position: relative;
+}
+
+.hero-content {
+    z-index: 2;
+    /* padding-right: 50px; Bootstrap col handles this */
+}
+
+.tagline {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(var(--accent-cyan-rgb), 0.1);
+    color: var(--accent-cyan);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+}
+.tagline .dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-cyan);
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.hero-content h1 {
+    font-family: var(--font-primary);
+    font-size: 5rem; /* Responsive adjustments needed */
+    line-height: 1.15;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.hero-content h1 .dumbbell-icon {
+    width: 3.2rem;
+    height: auto;
+    vertical-align: middle;
+    margin: 0 8px -8px 8px;
+    filter: drop-shadow(0 0 5px var(--accent-cyan));
+    color: var(--accent-cyan);
+}
+
+.subheading {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 550px;
+    line-height: 1.8;
+}
+
+.btn-primary {
+    background-image: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    color: var(--text-primary);
+    padding: 16px 40px;
+    border-radius: 8px; 
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: var(--font-primary);
+    letter-spacing: 0.5px;
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 20px rgba(var(--accent-pink-rgb), 0.3), 0 2px 10px rgba(var(--accent-purple-rgb), 0.2);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+.btn-primary:hover::before {
+    left: 100%;
+}
+.btn-primary:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 30px rgba(var(--accent-purple-rgb), 0.4), 0 4px 15px rgba(var(--accent-pink-rgb), 0.3);
+    color: var(--text-primary); /* Ensure text color persists on hover */
+}
+.btn-primary.btn-small {
+    font-size: 0.95rem;
+    padding: 12px 25px;
+}
+.btn-primary.btn-large {
+    font-size: 1.25rem;
+    padding: 18px 50px;
+}
+
+.reviews {
+    /* margin-top: 50px; */ /* Use Bootstrap mt-* */
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+.reviews .stars {
+    margin: 0 12px;
+    display: flex;
+}
+.reviews .star {
+    color: var(--accent-pink);
+    font-size: 1.2rem;
+    margin-right: 3px;
+    text-shadow: 0 0 5px var(--accent-pink);
+}
+.reviews .star.dimmed {
+    color: #404866;
+    text-shadow: none;
+}
+
+.hero-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero-image-container img {
+    /* max-width: 100%; // img-fluid handles this */
+    /* height: auto; // img-fluid handles this */
+    max-height: 70vh; /* Adjusted */
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4));
+}
+.hero-background-glow {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(var(--accent-purple-rgb), 0.15) 0%, transparent 60%);
+    border-radius: 50%;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulseGlow 6s infinite alternate ease-in-out;
+}
+@keyframes pulseGlow {
+    from { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Glassmorphism Card Style */
+.glass-card {
+    background: var(--bg-glass);
+    border-radius: 15px;
+    border: 1px solid rgba(var(--accent-cyan-rgb), 0.2);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(var(--accent-cyan-rgb),0.1);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    display: flex; /* Added for flex-fill to work */
+    flex-direction: column; /* Added for flex-fill to work */
+    width: 100%; /* Ensure it takes full width of column */
+}
+.glass-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(var(--accent-pink-rgb), 0.4);
+    box-shadow: 0 0 40px rgba(var(--accent-pink-rgb), 0.2), 0 0 20px rgba(var(--accent-purple-rgb), 0.1);
+}
+
+/* --- Philosophy Section --- */
+.philosophy-text h3 {
+    font-family: var(--font-primary);
+    font-size: 2.8rem;
+    margin-bottom: 25px;
+    line-height: 1.3;
+}
+.philosophy-text p {
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+}
+.philosophy-image img {
+    /* width: 100%; // img-fluid handles this */
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border: 2px solid rgba(var(--accent-cyan-rgb),0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.philosophy-image img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(var(--accent-cyan-rgb),0.3);
+}
+
+/* --- Programs Section --- */
+/* .programs-grid { display: grid; ... Bootstrap handles this } */
+.program-card { /* Inherits .glass-card */
+    overflow: hidden; /* Keep for image scaling effect */
+    padding: 0; /* Glass card has padding, this one needs image at edges */
+}
+.program-card img {
+    width: 100%; /* Fill the card width */
+    height: 240px;
+    object-fit: cover;
+    border-top-left-radius: 15px; /* Match card radius */
+    border-top-right-radius: 15px;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: saturate(0.8) brightness(0.9);
+    margin:0; /* Reset any default margins */
+}
+.program-card:hover img {
+    transform: scale(1.1);
+    filter: saturate(1) brightness(1);
+}
+.program-card-content {
+    padding: 25px;
+    flex-grow: 1; /* Allows button to be pushed to bottom */
+    display: flex;
+    flex-direction: column;
+}
+.program-card-content h3 {
+    font-family: var(--font-primary);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+.program-card-content p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+/* --- Why Choose Us Section --- */
+/* .features-grid { ... Bootstrap handles this } */
+.feature-item { /* Inherits .glass-card */
+    padding: 35px;
+    text-align: center;
+}
+.feature-item .icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 20px;
+    line-height: 1;
+    background-image: linear-gradient(45deg, var(--accent-pink), var(--accent-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(var(--accent-pink-rgb),0.5);
+}
+.feature-item h4 {
+    font-family: var(--font-primary);
+    font-size: 1.9rem;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+.feature-item p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* --- Testimonials Section --- */
+/* .testimonials-grid { ... Bootstrap handles this } */
+.testimonial-card { /* Inherits .glass-card */
+    padding: 35px;
+    position: relative;
+}
+.testimonial-card::before {
+    content: '“';
+    font-family: var(--font-primary);
+    font-size: 6rem;
+    line-height: 1;
+    position: absolute;
+    top: 15px;
+    left: 25px;
+    opacity: 0.08; /* Slightly more subtle */
+    z-index: 0;
+    background-image: linear-gradient(to bottom right, var(--accent-purple), var(--accent-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    user-select: none; /* Prevent selection of quote mark */
+}
+.testimonial-card p.quote {
+    font-style: normal;
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+    font-size: 1.05rem; /* Slightly adjusted */
+    line-height: 1.8;
+}
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+.testimonial-author img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-right: 18px;
+    object-fit: cover;
+    border: 2px solid var(--accent-purple);
+    box-shadow: 0 0 10px rgba(var(--accent-purple-rgb),0.5);
+}
+.testimonial-author h5 {
+    font-family: var(--font-primary);
+    font-size: 1.4rem;
+    margin-bottom: 3px;
+}
+.testimonial-author span {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: block;
+}
+
+/* --- Join Us Section --- */
+#join-us {
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(var(--accent-pink-rgb), 0.15) 0%, transparent 50%),
+        var(--bg-secondary); /* Fallback if first one is too much */
+    background-blend-mode: overlay;
+    padding: 100px 0; /* Adjusted padding */
+}
+#join-us .section-title {
+    font-size: 3.8rem;
+}
+
+/* --- Contact Form Section --- */
+.contact-form { /* Inherits .glass-card */
+    max-width: 750px;
+    /* margin: 50px auto 0; // mx-auto handles horizontal centering */
+    padding: 40px;
+}
+/* .contact-form .form-group { Bootstrap row g-3 handles this } */
+
+/* Styling Bootstrap form-control */
+.contact-form .form-control {
+    width: 100%;
+    padding: 15px 18px;
+    background-color: rgba(var(--bg-primary-rgb), 0.7); /* Darker input */
+    border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-form .form-control::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+.contact-form .form-control:focus {
+    outline: none;
+    border-color: var(--accent-pink);
+    box-shadow: 0 0 15px rgba(var(--accent-pink-rgb), 0.3);
+    background-color: rgba(var(--bg-primary-rgb), 0.9); /* Slightly change on focus */
+    color: var(--text-primary);
+}
+.contact-form textarea.form-control {
+    resize: vertical;
+    min-height: 140px;
+    /* margin-bottom: 25px; // Bootstrap mb-3 on parent div */
+}
+/* .contact-form .btn-primary { width: 100%; // Bootstrap w-100 class } */
+
+/* --- Footer --- */
+footer {
+    background-color: #060914;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(var(--accent-cyan-rgb), 0.15);
+    font-size: 0.9rem;
+}
+footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+footer a:hover {
+    color: var(--accent-pink);
+    text-shadow: 0 0 5px var(--accent-pink);
+}
+footer .social-links {
+    margin-top: 20px;
+}
+footer .social-links a {
+    margin: 0 10px; /* Slightly reduced margin */
+    display: inline-block;
+    color: var(--text-secondary); /* Initial color for SVG */
+}
+footer .social-links svg {
+    width: 26px; /* Slightly larger */
+    height: 26px;
+    transition: transform 0.3s ease, filter 0.3s ease, color 0.3s ease; /* Added color transition */
+    filter: opacity(0.7); /* Simpler filter */
+}
+footer .social-links a:hover svg {
+    transform: scale(1.2) translateY(-3px); /* Enhanced hover */
+    filter: opacity(1);
+    color: var(--accent-cyan);
+}
+
+
+/* --- Responsive Design Adjustments (Bootstrap handles most structure) --- */
+@media (max-width: 991.98px) { /* lg */
+    .hero-content h1 { font-size: 3.8rem; }
+    .section-title { font-size: 3rem; }
+    #join-us .section-title { font-size: 3.2rem; }
+    /* .philosophy-content flex-direction already handled by Bootstrap col stacking */
+    .philosophy-image { margin-top: 40px; } /* Keep this specific margin */
+}
+
+@media (max-width: 767.98px) { /* md */
+    .hero { min-height: auto; padding-top: 40px; padding-bottom: 40px; text-align: center;}
+    .hero-content h1 { font-size: 3rem; }
+    .hero-content h1 .dumbbell-icon { width: 2.8rem; margin-bottom: -6px;}
+    .tagline { justify-content: center; }
+    .reviews { justify-content: center; }
+    .hero-image-container img { max-height: 50vh; }
+
+
+    .section { padding: 60px 0; }
+    .section-title { font-size: 2.5rem; }
+    #join-us .section-title { font-size: 2.8rem; }
+}
+
+@media (max-width: 575.98px) { /* sm */
+    .hero-content h1 { font-size: 2.4rem; }
+    .section-title { font-size: 2.2rem; }
+    #join-us .section-title { font-size: 2.4rem; }
+    .btn-primary, .nav-cta { padding: 12px 25px; font-size: 0.9rem; }
+    .btn-primary.btn-large { padding: 15px 35px; font-size: 1.1rem;}
+    .program-card-content h3 { font-size: 1.8rem; }
+    .feature-item h4 { font-size: 1.6rem; }
+    .testimonial-author h5 { font-size: 1.2rem; }
+}
+/* Add to style.css if desired */
+.program-title {
+    font-family: var(--font-primary);
+    font-weight: 700; /* Or your preferred weight */
+    margin-bottom: 0.75rem;
+}
+.program-benefits li {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+.program-benefits .text-highlight {
+    font-size: 1.2em; /* Make checkmark slightly bigger */
+    line-height: 1;
+}
+
+#forgefit-difference .section-title.text-lg-start::after {
+    margin-left: 0; /* Adjust line under title if it's left-aligned */
+    margin-right: auto;
+}
+/* Add to style.css */
+.featured-testimonial {
+    border-color: var(--accent-pink); /* Highlight border */
+    box-shadow: 0 0 25px rgba(var(--accent-pink-rgb), 0.3), 
+                0 0 40px rgba(var(--accent-purple-rgb), 0.15), 
+                inset 0 0 0 1px rgba(var(--accent-pink-rgb),0.15);
+    transform: scale(1.02); /* Slightly larger */
+}
+
+.featured-testimonial:hover { /* Adjust hover if needed */
+    transform: translateY(-5px) scale(1.04);
+     box-shadow: 0 0 35px rgba(var(--accent-pink-rgb), 0.4), 0 0 25px rgba(var(--accent-purple-rgb), 0.2);
+}
+
+.featured-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background-image: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    color: var(--text-primary);
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 10px rgba(var(--accent-pink-rgb), 0.3);
+    z-index: 2; /* Ensure it's above the quote mark */
+}
+
+/* Ensure testimonial card quote mark is behind the badge */
+.testimonial-card::before {
+    z-index: 0; 
+}
+.testimonial-card p.quote,
+.testimonial-card .testimonial-author {
+    position: relative;
+    z-index: 1;
+}
+/* Add to style.css */
+.pricing-card .pricing-tier-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.8rem; /* Adjust as needed */
+    margin-bottom: 0.5rem;
+}
+
+.pricing-card .pricing-price {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.pricing-card .pricing-price .text-highlight { /* For the dollar sign */
+    font-size: 0.6em;
+    vertical-align: super;
+    margin-right: 2px;
+}
+
+.pricing-card ul li {
+    padding: 0.3rem 0;
+}
+
+.pricing-card.featured-plan {
+    border-color: var(--accent-cyan); /* Or another accent */
+    box-shadow: 0 0 25px rgba(var(--accent-cyan-rgb), 0.3), 
+                0 0 40px rgba(var(--accent-purple-rgb), 0.15), 
+                inset 0 0 0 1px rgba(var(--accent-cyan-rgb),0.15);
+    transform: scale(1.03);
+    position: relative; /* For the badge */
+}
+ .pricing-card.featured-plan:hover {
+    transform: translateY(-5px) scale(1.05);
+ }
+
+/* .featured-badge style from testimonials.html can be reused 
+   or you can create a new one if you want different colors.
+   If reusing, ensure it's general enough or copy and adjust.
+   The one provided in testimonials.html has a pink/purple gradient.
+   The HTML for this page's badge specifies cyan/purple.
+*/
+/* If you copied the .featured-badge from testimonials, it's fine.
+   If not, here's a version for this page's HTML:
+*/
+.featured-badge { /* General badge styling */
+    position: absolute;
+    color: var(--text-primary);
+    padding: 6px 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 0 0 8px 8px; /* Example positioning */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 10px rgba(0,0,0, 0.2);
+    z-index: 2;
+}
+/* Example for top-right absolute badge as in HTML: */
+ .pricing-card .featured-badge {
+    top: -1px; /* Adjust to sit nicely on the border */
+    right: -1px;
+    border-radius: 0 15px 0 8px; /* Match card radius on top-right */
+    padding: 8px 18px;
+ }
+
+
+.step-icon {
+    font-family: var(--font-primary);
+    font-weight: 700;
+}
+/* Add to style.css */
+.contact-info-item a.hover-accent:hover {
+    color: var(--accent-cyan) !important; /* Or var(--accent-pink) */
+    text-decoration: none; /* Optional: remove underline on hover if it appears */
+}
+
+.contact-social-links a {
+    color: var(--text-secondary);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.contact-social-links a:hover {
+    color: var(--accent-cyan); /* Or another accent */
+    transform: scale(1.1);
+}
+
+/* Styling for the contact form on this page to match the homepage one */
+.contact-form-page.glass-card {
+    /* max-width: 750px; /* Let the column handle width */
+    /* margin: 50px auto 0; */
+    padding: 40px; /* Same as homepage section */
+}
+.contact-form-page .form-control {
+    width: 100%;
+    padding: 15px 18px;
+    background-color: rgba(var(--bg-primary-rgb), 0.7);
+    border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-form-page .form-control::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+.contact-form-page .form-control:focus {
+    outline: none;
+    border-color: var(--accent-pink);
+    box-shadow: 0 0 15px rgba(var(--accent-pink-rgb), 0.3);
+    background-color: rgba(var(--bg-primary-rgb), 0.9);
+    color: var(--text-primary);
+}
+.contact-form-page textarea.form-control {
+    resize: vertical;
+    min-height: 140px;
+}
+/* Add to style.css */
+.btn-secondary-custom {
+    background-color: transparent;
+    color: var(--accent-cyan); /* Or another accent */
+    padding: 16px 40px; /* Match btn-primary padding if desired */
+    border-radius: 8px; 
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem; /* Match btn-primary */
+    font-family: var(--font-primary);
+    letter-spacing: 0.5px;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid var(--accent-cyan); /* Or another accent */
+    box-shadow: 0 0 15px rgba(var(--accent-cyan-rgb), 0.2); /* Subtle glow */
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary-custom:hover {
+    background-color: var(--accent-cyan); /* Or another accent */
+    color: var(--bg-primary); /* Text color changes to dark on hover */
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 5px 25px rgba(var(--accent-cyan-rgb), 0.4);
+}
+
+.btn-secondary-custom.btn-large { /* If you use .btn-large with it */
+    font-size: 1.25rem;
+    padding: 18px 50px;
+}
